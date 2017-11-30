@@ -1,7 +1,29 @@
 
+<%- if @image.errors.any? %>
+    <div class="alert alert-danger">
+        <div class="alert heading">Ooops</div>
+        <h3>Ha ocurrido un error</h3>
+    </div>
+<%end%>  
 
-<%=form_for @image do |f| %>
-<%=f.label :descripcion %>
-<%=f.text_field :description %>
-<%=f.submit %> 
-<%end%>
+<div class="container">
+    <div class="form-group">
+        <%=form_for @image do |f| %>
+        <%=f.label :descripcion %>
+        <%=f.text_field :description,  class:'form-control'%>
+        <%- if @image.errors.any? %>
+        <span class="badge badge-pill badge-danger">
+            <%= @image.errors[:description].first %>
+        </span>
+        <%end%>
+
+        
+        <br>
+        <%=f.label :descripcion %>
+        <%=f.file_field :picture %>
+
+
+        <%=f.submit 'Enviar', :class=> 'btn btn-primary' %> 
+        <%end%>
+    </div>
+</div>
